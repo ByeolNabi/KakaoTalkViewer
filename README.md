@@ -49,6 +49,16 @@ YYYY. M. D. HH:MM, {이름} : {text}
 ## 스택
 프론트엔드 : 웹 react   
 데이터 파싱 : node.js
+## 데이터구조
+### 채팅
+```
+{
+    sender: "user2",
+    message: "Hi there!",
+    timestamp: "2024-07-26T12:01:00Z",
+    imagePath: "" // 이미지 경로가 없을 때 빈 문자열
+}
+```
 ## 체크리스트
 ### 데이터
 - [ ] 정규형으로 파싱하기

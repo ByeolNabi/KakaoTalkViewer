@@ -1,4 +1,6 @@
-class chatDataStructor {
+const fs = require("fs");
+
+class chatDataParser {
   constructor() {
     this.chatTXT;
     this.imageNameList;
@@ -30,6 +32,8 @@ class chatDataStructor {
    */
   dictionaryFileLister(folderPath) {
     // 폴더 리스트 쭈루룩 뽑아와서 image들 append하고 날짜 데이터 따로 저장하고 txt파일 찾아서 경로 저장하기
+    let fileList = fs.readdirSync(folderPath);
+    console.log(fileList);
     return { chatFilePath: "", imageNameList: "" };
   }
 
@@ -49,7 +53,15 @@ class chatDataStructor {
    * }>} 구조화된 chat 데이터
    */
   chatParser(chatFilePath) {
-    // 영차영차 파싱하자
+    let parsedChatData;
+
+    fs.readFile(chatFilePath, "utf8", (err, data) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      parsedChatData = parseMessages(data);
+    });
 
     return parsedChatData;
   }
@@ -124,8 +136,11 @@ class chatDataStructor {
 }
 
 // util //
+/**
+ * 정규식을 사용하여 YYYYMMDD_HHMM 형식을 추출합니다.
+ *
+ */
 function extractDateFromFilename(filename) {
-  // 정규식을 사용하여 YYYYMMDD_HHMM 형식을 추출합니다.
   const match = filename.match(/(\d{8})_(\d{4})/);
 
   if (match) {
@@ -142,3 +157,59 @@ function extractDateFromFilename(filename) {
 
   return null; // 매치되지 않으면 null 반환
 }
+
+/**
+ * raw채팅 데이터를 파싱한다.
+ */
+function parseMessages(input) {
+  const lines = input.split("\n");
+  const messages = [];
+
+  for (let line of lines) {
+    line = line.trim();
+    if (!line) continue;
+
+    // 날짜 라인 체크 (무시)
+    if (line.match(/^\d{4}년 \d{1,2}월 \d{1,2}일/)) {
+      continue;
+    }
+
+    // 메시지 라인 파싱
+    const match = line.match(
+      /^(\d{4}\. \d{1,2}\. \d{1,2}\. \d{2}:\d{2}), (.+?) : (.+)$/
+    );
+    if (match) {
+      const [, timestamp, sender, message] = match;
+
+      // 날짜 파싱 수정
+      const [year, month, day, time] = timestamp.split(".");
+      const [hour, minute] = time.trim().split(":");
+      const date = new Date(year, month - 1, day, hour, minute);
+
+      let imageInfo = { imageTF: false, imagePath: [], imageQuantity: 0 };
+
+      // 이미지 메시지 체크
+      if (message.startsWith("사진")) {
+        imageInfo.imageTF = true;
+        const quantityMatch = message.match(/사진 (\d+)장/);
+        imageInfo.imageQuantity = quantityMatch
+          ? parseInt(quantityMatch[1])
+          : 1;
+      }
+
+      messages.push({
+        timestamp: date.toISOString(),
+        sender,
+        message,
+        imageInfo,
+      });
+    } else if (messages.length > 0) {
+      // 멀티라인 메시지 처리
+      messages[messages.length - 1].message += "\n" + line;
+    }
+  }
+
+  return messages;
+}
+
+module.exports = { chatDataParser };

@@ -64,11 +64,14 @@ class chatDataStructor {
    */
   imagePathParser(imageNameList) {
     // 파싱을 편리를 위해서 image fileName만을 따로 받았음
-    parsedImageData = []
-    for(let img_idx = 0; img_idx < imageNameList.length; ++img_idx){
-      
-      imageMETA = {path : this.dataAbspath+"", timestamp: imgDate.toISOString(), image_idx: number}
-      parsedImageData.push()
+    parsedImageData = [];
+    for (let img_idx = 0; img_idx < imageNameList.length; ++img_idx) {
+      imgDate = extractDateFromFilename(imageNameList[img_idx]);
+      imageMETA = {
+        path: this.dataAbspath + imageNameList[img_idx],
+        timestamp: imgDate.toISOString(),
+      };
+      parsedImageData.push(imageMETA);
     }
     return parsedImageData;
   }
@@ -118,4 +121,24 @@ class chatDataStructor {
 
     return resultData;
   }
+}
+
+// util //
+function extractDateFromFilename(filename) {
+  // 정규식을 사용하여 YYYYMMDD_HHMM 형식을 추출합니다.
+  const match = filename.match(/(\d{8})_(\d{4})/);
+
+  if (match) {
+    const [, dateStr, timeStr] = match;
+    const year = dateStr.slice(0, 4);
+    const month = dateStr.slice(4, 6);
+    const day = dateStr.slice(6, 8);
+    const hour = timeStr.slice(0, 2);
+    const minute = timeStr.slice(2, 4);
+
+    // Date 객체 생성 (월은 0부터 시작하므로 1을 뺍니다)
+    return new Date(year, month - 1, day, hour, minute);
+  }
+
+  return null; // 매치되지 않으면 null 반환
 }

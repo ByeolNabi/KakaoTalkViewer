@@ -3,17 +3,17 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
 import ViewerPage from "./pages/ViewerPage";
-import FileContext from "./context/FileContext";
+import { FileProvider } from "./context/FileContext";
 
 const AppRoute = () => (
-  <Router>
-    <Routes>
-      <FileContext>
+  <FileProvider>
+    <Router>
+      <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/viewer" element={<ViewerPage />} />
-      </FileContext>
-    </Routes>
-  </Router>
+      </Routes>
+    </Router>
+  </FileProvider>
 );
 
 export default AppRoute;

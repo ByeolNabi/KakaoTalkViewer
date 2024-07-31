@@ -102,4 +102,7 @@ YYYY. M. D. HH:MM, {이름} : {text}
 - [x] react build tool 선택(vite)
 - [x] 파일 및 폴더구조 미리 설계하기
 - [x] 텍스트 메시지 먼저 출력해보기
-- [ ] 채팅 컴포넌트 만들기
+- [x] Home에서 Viewer로 chat data 넘기기, Context이용
+- [ ] Home에서 chat.txt parsing하기, (image연결은 나중에)
+  - 파싱은 하겠는데 이미지와 채팅 연결을 어떻게 해야할까. path로 연결하는게 아닌데...
+- [ ] Viewer에서 일단 채팅 출력하기

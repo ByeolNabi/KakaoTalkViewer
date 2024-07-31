@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 
-import AppRoute from "./AppRoute";
+import AppRoute from "./routes";
 
 function App() {
   return (

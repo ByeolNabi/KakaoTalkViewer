@@ -2,22 +2,19 @@ import React, { createContext, useContext, useState } from "react";
 
 const FileContext = createContext();
 
-const useFile = () => {
-  return useContext(FileProvider);
+export const useFile = () => {
+  return useContext(FileContext);
 };
 
-const FileProvider = ({ children }) => {
+export const FileProvider = ({ children }) => {
   const [chatContent, setChatContent] = useState();
   const [imageContents, setimageContents] = useState();
 
   return (
-    <FileProvider.Provider
+    <FileContext.Provider
       value={{ chatContent, setChatContent, imageContents, setimageContents }}
     >
       {children}
-    </FileProvider.Provider>
+    </FileContext.Provider>
   );
 };
-
-export default FileContext;
-s;

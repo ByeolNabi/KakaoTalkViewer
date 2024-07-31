@@ -1,13 +1,20 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { useFile } from "../context/FileContext";
 
 const FileGetter = () => {
-  const [fileContent, setFileContent] = useState("");
+  const { chatContent, setChatContent } = useFile();
+
+  const navigate = useNavigate();
+
   const handleTextChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setFileContent(reader.result);
+        setChatContent(reader.result);
+        navigate("/viewer");
       };
       reader.readAsText(file);
     }
@@ -16,7 +23,7 @@ const FileGetter = () => {
   return (
     <div>
       <input type="file" onChange={handleTextChange} />
-      <>{fileContent}</>
+      <>{chatContent}</>
     </div>
   );
 };

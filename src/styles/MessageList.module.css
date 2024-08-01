@@ -1,29 +1,61 @@
 .chatBubble {
-    background-color: #f1f0f0;
-    border-radius: 15px;
-    padding: 10px;
-    margin: 5px 0;
-    max-width: 70%;
-    word-wrap: break-word;
-    position: relative;
-  }
-  
-  .chatBubble::before {
-    content: "";
-    position: absolute;
-    top: 15px;
-    left: -10px;
-    width: 0;
-    height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-right: 10px solid #f1f0f0;
-  }
-  
-  .chatContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px;
-  }
-  
+  border-radius: 15px;
+  padding: 10px;
+  margin: 5px;
+  word-wrap: break-word;
+  position: relative;
+}
+
+.left {
+  background-color: #f1f0f0;
+  align-self: flex-start;
+}
+
+.left::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: -10px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid #f1f0f0;
+}
+
+.right {
+  background-color: #a0e7e5;
+  align-self: flex-end;
+}
+
+.right::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  right: -10px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #a0e7e5;
+}
+
+.bubbleContainer {
+  display: flex;
+  margin: 5px 0;
+}
+
+.bubbleContainer.left {
+  justify-content: flex-start;
+}
+
+.bubbleContainer.right {
+  justify-content: flex-end;
+}
+
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  overflow-y: auto;
+}

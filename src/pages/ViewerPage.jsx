@@ -10,7 +10,7 @@ const ViewerPage = () => {
 
   return (
     <div>
-      <MessageList/>
+      <MessageList owner = {"김대규"}/>
     </div>
   );
 };

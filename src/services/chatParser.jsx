@@ -1,6 +1,6 @@
-const fs = require("fs");
+import fs from "fs";
 
-class chatDataParser {
+export class chatDataParser {
   constructor() {
     this.chatTXT;
     this.imageNameList;
@@ -165,7 +165,7 @@ function extractDateFromFilename(filename) {
 /**
  * raw채팅 데이터를 파싱한다.
  */
-function parseMessages(input) {
+export function parseMessages(input) {
   const lines = input.split("\n");
   const messages = [];
 
@@ -220,5 +220,3 @@ function parseMessages(input) {
 
   return messages;
 }
-
-module.exports = { chatDataParser };

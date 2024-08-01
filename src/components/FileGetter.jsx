@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useFile } from "../context/FileContext";
+import { parseMessages } from "../services/chatParser";
 
 const FileGetter = () => {
   const { chatContent, setChatContent } = useFile();
@@ -13,7 +14,8 @@ const FileGetter = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setChatContent(reader.result);
+        let chatJSON = parseMessages(reader.result);
+        setChatContent(chatJSON);
         navigate("/viewer");
       };
       reader.readAsText(file);

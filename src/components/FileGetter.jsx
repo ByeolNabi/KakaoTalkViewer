@@ -5,7 +5,7 @@ import { useFile } from "../context/FileContext";
 import { parseMessages } from "../services/chatParser";
 
 const FileGetter = () => {
-  const { chatContent, setChatContent } = useFile();
+  const { chatContents, setChatContents } = useFile();
 
   const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ const FileGetter = () => {
       const reader = new FileReader();
       reader.onload = () => {
         let chatJSON = parseMessages(reader.result);
-        setChatContent(chatJSON);
+        setChatContents(chatJSON);
         navigate("/viewer");
       };
       reader.readAsText(file);
@@ -25,7 +25,7 @@ const FileGetter = () => {
   return (
     <div>
       <input type="file" onChange={handleTextChange} />
-      <>{chatContent}</>
+      <>{chatContents}</>
     </div>
   );
 };

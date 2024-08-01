@@ -7,12 +7,12 @@ export const useFile = () => {
 };
 
 export const FileProvider = ({ children }) => {
-  const [chatContent, setChatContent] = useState();
+  const [chatContents, setChatContents] = useState();
   const [imageContents, setimageContents] = useState();
 
   return (
     <FileContext.Provider
-      value={{ chatContent, setChatContent, imageContents, setimageContents }}
+      value={{ chatContents, setChatContents, imageContents, setimageContents }}
     >
       {children}
     </FileContext.Provider>

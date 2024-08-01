@@ -7,12 +7,12 @@ import { useFile } from "../context/FileContext";
  * chat json데이터를 보기좋게 표현해주는 페이지입니다.
  */
 const ViewerPage = () => {
-  let { chatContent } = useFile();
 
   return (
     <div>
-      <MessageList></MessageList>
-      {JSON.stringify(chatContent)}
+      맵리스트
+      <MessageList/>
+      맵리
     </div>
   );
 };

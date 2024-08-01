@@ -105,4 +105,9 @@ YYYY. M. D. HH:MM, {이름} : {text}
 - [x] Home에서 Viewer로 chat data 넘기기, Context이용
 - [x] Home에서 chat.txt parsing하기, (image연결은 나중에)
   - 파싱은 하겠는데 이미지와 채팅 연결을 어떻게 해야할까. path로 연결하는게 아닌데...
-- [ ] Viewer에서 일단 채팅 출력하기
+- [x] Viewer에서 일단 채팅 출력하기
+- [x] 기초적인 메시지 레이아웃 짜기 (flex)
+  - [ ] "나"를 오른쪽으로 붙이기
+- [ ] 이미지 연결하기
+  - [ ] 폴더 안에 있는 모든 파일 브라우저에 로드하기
+  - [ ] 브라우저에서 이미지 연동하기 위해 chatParser코드 수정

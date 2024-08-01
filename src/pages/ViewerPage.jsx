@@ -10,9 +10,7 @@ const ViewerPage = () => {
 
   return (
     <div>
-      맵리스트
       <MessageList/>
-      맵리
     </div>
   );
 };

@@ -1,6 +1,7 @@
 {
   "name": "kakaotalkviewer",
   "private": true,
+  "description": "kakaotalkViwer",
   "version": "0.0.0",
   "type": "module",
   "main": "electron/main.js",
@@ -11,9 +12,11 @@
     "preview": "vite preview",
     "electron:dev": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && electron .\"",
     "electron:build": "npm run build && electron-builder",
-    "electron:serve": "npm run build && electron ."
+    "electron:serve": "npm run build && electron .",
+    "electron:osx": "electron-builder --mac"
   },
   "dependencies": {
+
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.25.1"
@@ -30,6 +33,43 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
     "vite": "^5.3.4",
-    "wait-on": "^7.2.0"
-  }
+    "wait-on": "^7.2.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+        "productName": "Start Electron",
+        "appId": "net.jetalab.ex.startelectron",
+        "asar": true,
+        "mac": {
+            "target": [
+                "default"
+            ]
+        },
+        "dmg": {
+            "title": "Start Electron"
+        },
+        "win": {
+            "target": [
+                {
+                    "target": "nsis",
+                    "arch": [
+                        "x64",
+                        "ia32"
+                    ]
+                }
+            ]
+        },
+        "nsis": {
+            "oneClick": false,
+            "allowToChangeInstallationDirectory": false,
+            "createDesktopShortcut": true
+        },
+        "directories": {
+            "buildResources": "./resources/installer/",
+            "output": "./dist/",
+            "app": "."
+        }
+    },
+    "author": "",
+    "license": "ISC"
 }

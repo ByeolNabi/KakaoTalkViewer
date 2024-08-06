@@ -125,3 +125,7 @@ electron빌드가 생각보다 귀찮다.
 웹에서 로컬파일을 가져올 수 없다고는 하지만 로컬에서 html을 열면 직접 접근이 가능하다.
 # 실행방법
 npm run electron:dev
+
+FileList
+
+File {name: '20240308_165747_1.jpeg'}

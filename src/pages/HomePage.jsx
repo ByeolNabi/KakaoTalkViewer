@@ -12,9 +12,9 @@ const HomePage = () => {
     <div>
       폴더를 지정해주세요
       <br />
-      <ImagePreview />
+      {/* <ImagePreview /> */}
       <FileGetter />
-      <FolderSelector/>
+      {/* <FolderSelector/> */}
     </div>
   );
 };

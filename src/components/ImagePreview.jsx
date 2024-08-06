@@ -17,7 +17,7 @@ const ImagePreview = () => {
 
   return (
     <div>
-      <input type="file" accept="image/*" onChange={handleImageChange} />
+      <input type="file" onChange={handleImageChange} multiple/>
       {selectedImage && (
         <div>
           <img

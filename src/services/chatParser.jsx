@@ -1,5 +1,3 @@
-import fs from "fs";
-
 export class chatDataParser {
   constructor() {
     this.chatTXT;
@@ -13,12 +11,9 @@ export class chatDataParser {
    * @param {string} folderPath - 카카오톡 채팅방 zip 압축해제 폴더의 경로
    * @returns {{ chatFilePath: string , imageNameList: string[] }} 파일 이름들 분류 데이터
    */
-  dictionaryFileLister(folderPath) {
+  dictionaryFileLister(fileList) {
     // 폴더 리스트 쭈루룩 뽑아와서 image들 append하고 날짜 데이터 따로 저장하고 txt파일 찾아서 경로 저장하기
-    let fileList = fs.readdirSync(folderPath);
-
     return {
-      chatFilePath: fileList[fileList.length - 1],
       imageNameList: fileList.slice(0, fileList.length - 1),
     };
   }
@@ -38,10 +33,8 @@ export class chatDataParser {
    *   }
    * }>} 구조화된 chat 데이터
    */
-  chatParser(chatFilePath) {
-    chatFilePath = __dirname + "/datas/" + chatFilePath;
-    const data = fs.readFileSync(chatFilePath, "utf8");
-    let parsedChatData = parseMessages(data);
+  chatParser(chatFile) {
+    let parsedChatData = parseMessages(chatFile);
 
     return parsedChatData;
   }
@@ -58,9 +51,9 @@ export class chatDataParser {
     // 파싱을 편리를 위해서 image fileName만을 따로 받았음
     let parsedImageData = [];
     for (let img_idx = 0; img_idx < imageNameList.length; ++img_idx) {
-      let imgDate = extractDateFromFilename(imageNameList[img_idx]);
+      let imgDate = extractDateFromFilename(imageNameList[img_idx]["name"]);
       let imageMETA = {
-        path: this.dataAbspath + imageNameList[img_idx],
+        path: img_idx,
         timestamp: imgDate.toISOString(),
       };
       parsedImageData.push(imageMETA);
@@ -126,13 +119,11 @@ export class chatDataParser {
    * @param {string} folderPath - 카카오톡 채팅방 zip 압축해제 폴더의 경로
    * @returns {object[]} 사용가능한 데이터구조로 변형한 채팅 데이터를 리턴합니다.
    */
-  start(folderPath) {
-    this.dataAbspath = folderPath + "/";
-    let { chatFilePath, imageNameList } = this.dictionaryFileLister(folderPath);
+  start(chatRaw, fileList) {
+    let { imageNameList } = this.dictionaryFileLister(fileList);
 
-    let parsedChatData = this.chatParser(chatFilePath); // chat Info 저장하기
+    let parsedChatData = this.chatParser(chatRaw); // chat Info 저장하기
     let parsedImageData = this.imagePathParser(imageNameList); // image Info 저장하기
-    console.log(parsedImageData);
 
     let resultData = this.chatDataMerger(parsedChatData, parsedImageData); // image와 chat 데이터 연동하기
     return resultData;

@@ -16,7 +16,7 @@ const MessageList = ({ owner }) => {
     const containerClass = owner == val.sender ? styles.right : styles.left;
 
     return (
-      <div className={styles.chatContainer}>
+      <div className={styles.chatContainer} key={idx}>
         <div className={`${styles.bubbleContainer} ${containerClass}`}>
           <div className={`${styles.chatBubble} ${bubbleClass}`}>
             <ChatMessage chatContent={val} />

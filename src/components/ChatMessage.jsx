@@ -6,17 +6,17 @@ import { useFile } from "../context/FileContext";
  */
 const ChatMessage = ({ chatContent }) => {
   let { imageContents } = useFile();
-
   return (
     <div>
       {chatContent.imageInfo.imageTF ? (
         <>
           <div>{chatContent.message}</div>
-          {/* <div>
-            {chatContent.imageInfo.imagePath.map((val, idx) => {
-              <img src={imageContents[parseInt(val)]}></img>;
-            })}
-          </div> */}
+          <div>
+            {chatContent.imageInfo.imagePath.map((val, idx) => (
+              <img src={imageContents[parseInt(val)]}></img>
+            ))}
+            {chatContent.imageInfo.imagePath.length} linker@@
+          </div>
 
           <div>{chatContent.timestamp}</div>
         </>

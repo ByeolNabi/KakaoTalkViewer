@@ -13,30 +13,38 @@ const FileGetter = () => {
 
   const handleTextChange = (event) => {
     const files = [...event.target.files];
+    const imageFiles = files.slice(0, -1);
+    const textFile = files[files.length - 1];
+    const newImages = [];
+
     if (files) {
-      const newImages = [];
-      // 이미지만 먼저 처리하기
-      for (let i = 0; i < files.length - 1; i++) {
-        console.log("이미지 처리중");
-        const file = files[i];
-        const reader = new FileReader();
-        reader.onload = () => {
-          newImages.push(reader.result);
-          if (newImages.length === files.length-1) {
-            setimageContents(newImages);
-          }
-        };
-        reader.readAsDataURL(file);
-      }
-      // 텍스트 데이터 처리
-      const reader = new FileReader();
-      reader.onload = () => {
-        let chatRAW = reader.result;
-        let mergedChatData = cdp.start(chatRAW, files);
-        setChatContents(mergedChatData);
-        navigate("/viewer");
-      };
-      reader.readAsText(files[files.length - 1]);
+      imageFiles
+        .reduce((promise, file) => {
+          return promise.then(() => {
+            return new Promise((resolve, reject) => {
+              const reader = new FileReader();
+              reader.onload = () => {
+                newImages.push(reader.result);
+                resolve();
+              };
+              reader.onerror = reject;
+              reader.readAsDataURL(file);
+            });
+          });
+        }, Promise.resolve())
+        .then(() => {
+          setimageContents(newImages);
+
+          // 텍스트 데이터 처리
+          const reader = new FileReader();
+          reader.onload = () => {
+            let chatRAW = reader.result;
+            let mergedChatData = cdp.start(chatRAW, files);
+            setChatContents(mergedChatData);
+            navigate("/viewer");
+          };
+          reader.readAsText(textFile);
+        });
     }
   };
 

@@ -13,11 +13,16 @@ const ChatMessage = ({ chatContent }) => {
           <div>{chatContent.message}</div>
           <div>
             {chatContent.imageInfo.imagePath.map((val, idx) => (
-              <img style={{width : "90%"}} src={imageContents[parseInt(val)]}></img>
+              <>
+                <img
+                  style={{ width: "90%" }}
+                  src={imageContents[parseInt(val)]}
+                  key={idx}
+                ></img>
+              </>
             ))}
-            {chatContent.imageInfo.imagePath.length} linker@@
           </div>
-
+          linker@@
           <div>{chatContent.timestamp}</div>
         </>
       ) : (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const ImagePreview = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState();
 
   const handleImageChange = (event) => {
     console.log(event.target.files);

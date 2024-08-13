@@ -191,6 +191,7 @@ export function parseMessages(input) {
           ? parseInt(quantityMatch[1])
           : 1;
       }
+      
       // 동영상 체크
       if (message.startsWith("동영상")) {
         imageInfo.imageTF = true;

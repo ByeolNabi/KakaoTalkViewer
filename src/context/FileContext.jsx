@@ -9,10 +9,18 @@ export const useFile = () => {
 export const FileProvider = ({ children }) => {
   const [chatContents, setChatContents] = useState();
   const [imageContents, setimageContents] = useState();
+  const [speaker, setSpeaker] = useState();
 
   return (
     <FileContext.Provider
-      value={{ chatContents, setChatContents, imageContents, setimageContents }}
+      value={{
+        chatContents,
+        setChatContents,
+        imageContents,
+        setimageContents,
+        speaker,
+        setSpeaker,
+      }}
     >
       {children}
     </FileContext.Provider>

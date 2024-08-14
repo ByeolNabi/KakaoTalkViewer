@@ -9,7 +9,6 @@ export class chatDataParser {
    * 폴더에 있는 파일이름들을 분석해줍니다.
    *
    * @param {string} folderPath - 카카오톡 채팅방 zip 압축해제 폴더의 경로
-   * @returns {{ chatFilePath: string , imageNameList: string[] }} 파일 이름들 분류 데이터
    */
   dictionaryFileLister(fileList) {
     // 폴더 리스트 쭈루룩 뽑아와서 image들 append하고 날짜 데이터 따로 저장하고 txt파일 찾아서 경로 저장하기
@@ -191,7 +190,7 @@ export function parseMessages(input) {
           ? parseInt(quantityMatch[1])
           : 1;
       }
-      
+
       // 동영상 체크
       if (message.startsWith("동영상")) {
         imageInfo.imageTF = true;

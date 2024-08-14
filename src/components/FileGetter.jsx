@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useFile } from "../context/FileContext";
 import { chatDataParser } from "../services/chatParser";
 
-const FileGetter = () => {
+const FileGetter = ({ name }) => {
   const cdp = new chatDataParser();
   const { chatContents, setChatContents, imageContents, setimageContents } =
     useFile();

@@ -3,7 +3,7 @@
 카카오톡에서 내보내기된 데이터인 사진과 txt를 묶어서 보여줍니다.
 
 ㅈ1금 ㅂㅏ로 ㅋㅏஞ캃오톡 뷰0ㅓ♀를 01용ㅎㅐ보ㅅㅔ요❥   
-ㅂㅏ로ㄱㅏㄱㅣ >> https://kakao-talk-viewer.vercel.app/
+ㅂㅏ로ㄱㅏㄱㅣ >> byeolnabi.github.io/KakaoTalkViewer/
 
 ## 개선점
 ### 신기능 후보

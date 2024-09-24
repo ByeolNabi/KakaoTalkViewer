@@ -1,5 +1,6 @@
 {
   "name": "kakaotalkviewer",
+  "homepage" : "https://byeolnabi.github.io/KakaoTalkViewer/",
   "private": true,
   "description": "kakaotalkViwer",
   "version": "0.0.0",
@@ -13,10 +14,11 @@
     "electron:dev": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && electron .\"",
     "electron:build": "npm run build && electron-builder",
     "electron:serve": "npm run build && electron .",
-    "electron:osx": "electron-builder --mac"
+    "electron:osx": "electron-builder --mac",
+    "predeploy" : "npm run build",
+    "deploy" : "gh-pages -d dist"
   },
   "dependencies": {
-
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.25.1"
@@ -27,49 +29,50 @@
     "@vitejs/plugin-react": "^4.3.1",
     "concurrently": "^8.2.2",
     "electron": "^31.3.1",
+    "electron-builder": "^24.13.3",
     "electron-is-dev": "^3.0.1",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.3",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
+    "gh-pages": "^6.1.1",
     "vite": "^5.3.4",
-    "wait-on": "^7.2.0",
-    "electron-builder": "^24.13.3"
+    "wait-on": "^7.2.0"
   },
   "build": {
-        "productName": "Start Electron",
-        "appId": "net.jetalab.ex.startelectron",
-        "asar": true,
-        "mac": {
-            "target": [
-                "default"
-            ]
-        },
-        "dmg": {
-            "title": "Start Electron"
-        },
-        "win": {
-            "target": [
-                {
-                    "target": "nsis",
-                    "arch": [
-                        "x64",
-                        "ia32"
-                    ]
-                }
-            ]
-        },
-        "nsis": {
-            "oneClick": false,
-            "allowToChangeInstallationDirectory": false,
-            "createDesktopShortcut": true
-        },
-        "directories": {
-            "buildResources": "./resources/installer/",
-            "output": "./dist/",
-            "app": "."
-        }
+    "productName": "Start Electron",
+    "appId": "net.jetalab.ex.startelectron",
+    "asar": true,
+    "mac": {
+      "target": [
+        "default"
+      ]
     },
-    "author": "",
-    "license": "ISC"
+    "dmg": {
+      "title": "Start Electron"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": false,
+      "createDesktopShortcut": true
+    },
+    "directories": {
+      "buildResources": "./resources/installer/",
+      "output": "./dist/",
+      "app": "."
+    }
+  },
+  "author": "",
+  "license": "ISC"
 }
